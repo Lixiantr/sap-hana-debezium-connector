@@ -1,0 +1,39 @@
+name: Verify
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Verify source and tests
+        env:
+          HANA_CDC_LARGE_TEST: 'true'
+        run: mvn -B --no-transfer-progress --settings .github/maven-settings.xml clean verify
+      - name: Verify documentation language and repository hygiene
+        shell: bash
+        run: |
+          if grep -R -n -P '[А-Яа-яЁё]' README.md NOTICE.md docs connector.example.properties worker-performance.properties; then
+            echo 'Non-English documentation or configuration comment found' >&2
+            exit 1
+          fi
+          if grep -R -n -E 'gitlab\.corp|/home/ubuntu|VM[1-5]' README.md NOTICE.md docs connector.example.properties worker-performance.properties; then
+            echo 'Environment-specific information found' >&2
+            exit 1
+          fi
