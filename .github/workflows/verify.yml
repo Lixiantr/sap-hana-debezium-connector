@@ -37,3 +37,10 @@ jobs:
             echo 'Environment-specific information found' >&2
             exit 1
           fi
+          test -s LICENSE
+          grep -q 'Apache License' LICENSE
+          grep -q '\[Apache License 2.0\](LICENSE)' README.md
+          if grep -R -n -E 'No public license|private project|private repository' README.md NOTICE.md docs; then
+            echo 'Obsolete private-license wording found' >&2
+            exit 1
+          fi

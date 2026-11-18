@@ -1,6 +1,6 @@
 # SAP HANA source connector for Kafka Connect
 
-This private project implements a streaming-only SAP HANA source connector using
+This open-source project implements a streaming-only SAP HANA source connector using
 HANA log backups. It publishes Debezium-compatible change records through Kafka
 Connect, with a native redo decoder, transaction ordering, and durable restart
 state. The goal is to capture committed changes without triggers or reads from
@@ -92,4 +92,6 @@ are not included.
 - [Compatibility and limitations](docs/compatibility.md)
 - [Performance and validation](docs/performance.md)
 
-No public license is granted by this private repository. See [NOTICE](NOTICE.md).
+The connector source code and documentation are licensed under the
+[Apache License 2.0](LICENSE). The SAP JDBC driver is separately licensed and
+is not included. See [NOTICE](NOTICE.md).

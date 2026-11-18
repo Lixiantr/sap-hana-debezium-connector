@@ -8,6 +8,15 @@
   <artifactId>hana-cdc-java-connector</artifactId>
   <version>0.6.0-rc.4</version>
   <name>SAP HANA CDC Java Connector</name>
+  <url>https://github.com/Lixiantr/sap-hana-debezium-connector</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
